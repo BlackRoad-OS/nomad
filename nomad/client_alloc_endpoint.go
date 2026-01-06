@@ -295,7 +295,6 @@ func (a *ClientAllocations) GarbageCollect(args *structs.AllocSpecificRequest, r
 		return err
 	} else if !aclObj.AllowNsOpAnyOf(alloc.Namespace,
 		acl.NamespaceCapabilitySubmitJob,
-		acl.NamespaceCapabilityGCAllocation,
 	) {
 		return structs.ErrPermissionDenied
 	}

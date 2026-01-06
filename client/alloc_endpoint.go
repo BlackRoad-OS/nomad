@@ -63,7 +63,6 @@ func (a *Allocations) GarbageCollect(args *nstructs.AllocSpecificRequest, reply 
 		return err
 	} else if !aclObj.AllowNsOpAnyOf(alloc.Namespace,
 		acl.NamespaceCapabilitySubmitJob,
-		acl.NamespaceCapabilityGCAllocation,
 	) {
 		return nstructs.ErrPermissionDenied
 	}

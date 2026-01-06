@@ -374,19 +374,6 @@ func TestAllocations_GarbageCollect_ACL(t *testing.T) {
 		must.ErrorContains(t, err, noSuchAllocErr.Error())
 
 	}
-
-	// Try request with a fine grain token
-	{
-		fineGrainToken := mock.CreatePolicyAndToken(t, server.State(), 1010, "test-valid-fine",
-			mock.NamespacePolicy(nstructs.DefaultNamespace, "", []string{acl.NamespaceCapabilityGCAllocation}))
-		req := &nstructs.AllocSpecificRequest{}
-		req.AuthToken = fineGrainToken.SecretID
-		req.AllocID = allocs[2].ID
-
-		var resp nstructs.GenericResponse
-		err := client.ClientRPC("Allocations.GarbageCollect", &req, &resp)
-		must.ErrorContains(t, err, noSuchAllocErr.Error())
-	}
 }
 
 func TestAllocations_Signal(t *testing.T) {
